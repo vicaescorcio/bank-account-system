@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Cc:</strong>
+  <%= @account.cc %>
+</p>
+
+<p>
+  <strong>Limit:</strong>
+  <%= @account.limit %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
