@@ -1,27 +1,40 @@
-<%= form_with(model: account, local: true) do |form| %>
+<%= form_with(model: account, remote: true, id:'account') do |form| %>
   <% if account.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+      <h2>
+        <%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
       <ul>
-      <% account.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% account.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+          <% end %>
       </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :cc %>
-    <%= form.text_field :cc, id: :account_cc %>
-  </div>
-
-  <div class="field">
-    <%= form.label :limit %>
-    <%= form.text_field :limit, id: :account_limit %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <% end %>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_balance
+            </i>
+            <%= form.collection_select :agency, Agency.order(:ag), :ag, :ag, class:'validate'%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_circle</i>
+          <%= form.label :cc %>
+            <%= form.text_field :cc, id: :account_cc, class:'validate' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">attach_money</i>
+          <%= form.label :limit %>
+          <%= form.text_field :limit, id: :account_limit %>
+        </div>
+      </div>
+      <div class="actions">
+       <!-- <%= form.submit %>-->
+      </div>
+      <% end %>

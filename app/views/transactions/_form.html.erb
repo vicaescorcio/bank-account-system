@@ -1,4 +1,4 @@
-<%= form_with(model: transaction, local: true) do |form| %>
+<%= form_with(model: transaction, remote: true, id:'transaction') do |form| %>
   <% if transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
@@ -10,23 +10,39 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :tr_type %>
-    <%= form.number_field :tr_type, id: :transaction_tr_type %>
+<div class="row">
+  <div class="input-field col s12">
+      <i class="material-icons prefix">monetization_on</i>
+     <%= form.select :tr_type, options_for_select(Transaction.tr_types.map {|type,value| [type,type]},selected: Transaction.tr_types[:saque])%>
   </div>
-
-  <div class="field">
-    <%= form.label :tr_date %>
-    <%= form.date_select :tr_date, id: :transaction_tr_date %>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+      <i class="material-icons prefix">date_range</i>
+    <%= form.label 'Data' %>
+    <%= form.text_field :tr_date, id: :transaction_tr_date, class:'datepicker' %>
   </div>
-
-  <div class="field">
+</div>
+<div class="row">
+  <div class="input-field col s12">
+      <i class="material-icons prefix">attach_money</i>
     <%= form.label :valor %>
     <%= form.text_field :valor, id: :transaction_valor %>
   </div>
-
+</div>
+<div class="row">
+  <div class="input-field col s6">
+      <i class="material-icons prefix">account_circle</i>
+      <%= form.label "Conta origem" %>
+      <%= form.text_field :account_from %>
+  </div>
+  <div class="input-field col s6">
+      <i class="material-icons prefix red-text">account_circle</i>
+      <%= form.label 'Conta destino' %>
+      <%= form.text_field :account_to %>
+  </div>
+</div>
   <div class="actions">
-    <%= form.submit %>
+    <!--<%= form.submit %>-->
   </div>
 <% end %>

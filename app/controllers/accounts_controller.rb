@@ -24,17 +24,17 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
-
+    @agency = set_agency
+    @account = @agency.accounts.new(account_params)
     respond_to do |format|
-      if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
+       if @account.save
+         format.json { head :no_content }
+         format.js     
+       else
+         format.json { render :json => { :error => @account.errors.full_messages }, :status => 422 }
+       end
+     end
+
   end
 
   # PATCH/PUT /accounts/1
@@ -66,7 +66,10 @@ class AccountsController < ApplicationController
     def set_account
       @account = Account.find(params[:id])
     end
-
+  
+    def set_agency
+      @agency = Agency.find_by(params[:agency])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def account_params
       params.require(:account).permit(:cc, :limit)

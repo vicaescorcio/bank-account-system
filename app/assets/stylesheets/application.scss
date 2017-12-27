@@ -13,6 +13,34 @@
  *= require_tree .
  *= require_self
  *= require materialize
- */
- @import "material_icons";
+ *= require custom_fonts.scss
 
+ 
+ */
+ 
+ @import "material_icons";
+ body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    font-family: 'Exo 2', sans-serif;
+}
+main {
+    flex: 1 0 auto;
+}
+.button-collapse{
+    position: fixed;
+    top:10px;
+    left: 20px;
+}
+#main{
+    margin: 40px;
+}
+a{
+    color:black !important;
+}
+
+.modal h5{
+    margin: 10px;
+}

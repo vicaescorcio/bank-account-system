@@ -24,19 +24,24 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
-
+    @account_to   = set_account_to
+    @account_from = set_account_from
+    @transaction  = current_user.transactions.new(transaction_params )
+    valor = @transaction.valor
+    @transaction.account_to_id = @account_to.id
+    if !@account_from.nil?
+       @transaction.account_from_id = @account_from.id
+    end
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
+        @transaction.updateValues
+        format.json { head :no_content }
+        format.js    
       else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.json { render :json => { :error => @transaction.errors.full_messages }, :status => 422 }
       end
     end
   end
-
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
@@ -67,6 +72,13 @@ class TransactionsController < ApplicationController
       @transaction = Transaction.find(params[:id])
     end
 
+    def set_account_to
+      @account_to = Account.find_by(cc:params[:transaction][:account_to])
+    end
+    
+    def set_account_from
+      @account_from = Account.find_by(cc:params[:transaction][:account_from])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
       params.require(:transaction).permit(:tr_type, :tr_date, :valor)

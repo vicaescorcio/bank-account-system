@@ -1,27 +1,33 @@
-<%= form_with(model: agency, remote: true) do |form| %>
+<%= form_with(model: agency, remote: true,id:'agency') do |form| %>
   <% if agency.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(agency.errors.count, "error") %> prohibited this agency from being saved:</h2>
+      <h2>
+        <%= pluralize(agency.errors.count, "error") %> prohibited this agency from being saved:</h2>
 
       <ul>
-      <% agency.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% agency.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+          <% end %>
       </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :ag %>
-    <%= form.text_field :ag, id: :agency_ag %>
-  </div>
-
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :agency_address %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <% end %>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">account_balance</i>
+          <%= form.label 'Número da Agência' %>
+            <%= form.text_field :ag, id: :agency_ag, class:'validate' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">location_on</i>
+          <%= form.label 'Endereço' %>
+            <%= form.text_field :address, id: :agency_address, class:'validate' %>
+        </div>
+      </div>
+      <div class="actions">
+       <!-- <%= form.submit %>-->
+      </div>
+      <% end %>

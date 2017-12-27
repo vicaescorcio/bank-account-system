@@ -1,0 +1,3 @@
+$('.modal').modal();
+$("#modal").html("<%= escape_javascript(render '/accounts/new_account') %>").modal('open');
+$('select').material_select();
