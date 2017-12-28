@@ -16,7 +16,6 @@
       <tr>
         <td><%= agency.ag %></td>
         <td><%= agency.address %></td>
-        <td><%= link_to 'Show', agency %></td>
         <td><%= link_to 'Edit', edit_agency_path(agency) %></td>
         <td><%= link_to 'Destroy', agency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -27,4 +26,6 @@
 <br>
 <div id="agencies">
 </div>
-<%= link_to 'New Agency', new_agency_path, remote: true %>
+<%= link_to  new_agency_path,class:'btn-floating btn-large waves-effect waves-light red', remote: true do %>
+<i class="material-icons">add</i>  
+<%end%>

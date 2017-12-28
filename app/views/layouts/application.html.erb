@@ -11,113 +11,87 @@
 
 <body>
   <main>
-    <a href="#" data-activates="slide-out" class="button-collapse">
-      <i class="material-icons">menu</i>
-    </a>
-    <div id='main'>
-      <div class='container'>
-        <ul id="slide-out" class="side-nav">
-          <li>
-            <div class="user-view">
-              <div class="background">
-                <%=image_tag('/imgs/bk_sidenav.jpg')%>
-              </div>
-              <a href="#!user">
-                <%=image_tag('/imgs/profile.jpg', class:'responsive circle')%>
-              </a>
-              <a href="#!name">
-                <span class="white-text name">User</span>
-              </a>
-              <a href="#!email">
-                <span class="white-text email">
-                <!--  <%= current_user.email %>-->
-                </span>
-              </a>
-            </div>
-          </li>
-          <li>
-            <%=link_to agencies_path do %>
-              <%=image_tag('/imgs/icons/bank.png',size:'20x20',class:'responsive')%>
-                <span class="right">Agências</span>
-                <%end%>
-          </li>
-          <li>
-            <%=link_to accounts_path do%>
-              <%=image_tag('/imgs/icons/account.png',size:'24x24',class:'responsive')%>
-                <span class="right">Contas</span>
-                <%end%>
-          </li>
-          <li>
-            <%= link_to transactions_path do %>
-              <%=image_tag('/imgs/icons/transaction.png',size:'20x20',class:'responsive')%>
-                <span class="right">Transações</span>
-                <%end%>
-          </li>
-          <li>
-            <div class="divider"></div>
-          </li>
-          <li>
-            <a class="subheader">Subheader</a>
-          </li>
-          <li>
-            <a class="waves-effect" href="#!">Sair</a>
-          </li>
-        </ul>
-
-        <div id="modal" class="modal modal-fixed-footer">
-        </div>
-        <%= yield %>
-      </div>
-    </div>
-
-    <div class="fixed-action-btn horizontal">
-      <a class="btn-floating btn-large red">
-        <i class="large material-icons">mode_edit</i>
+    <% if user_signed_in? %>
+      <a href="#" data-activates="slide-out" class="button-collapse">
+        <i class="material-icons">menu</i>
       </a>
-      <ul>
-        <li>
-          <a class="btn-floating red">
-            <i class="material-icons">insert_chart</i>
-          </a>
-        </li>
-        <li>
-          <a class="btn-floating yellow darken-1">
-            <i class="material-icons">format_quote</i>
-          </a>
-        </li>
-        <li>
-          <a class="btn-floating green">
-            <i class="material-icons">publish</i>
-          </a>
-        </li>
-        <li>
-          <a class="btn-floating blue">
-            <i class="material-icons">attach_file</i>
-          </a>
-        </li>
-      </ul>
-    </div>
+      <div id='main'>
+        <div class='container'>
+          <ul id="slide-out" class="side-nav">
+            <li>
+              <div class="user-view">
+                <div class="background">
+                  <%=image_tag('/imgs/bk_sidenav.jpg')%>
+                </div>
+                <a href="#!user">
+                  <%=image_tag('/imgs/profile.png', class:'responsive circle')%>
+                </a>
+                <a href="#!name">
+                  <span class="white-text name">User</span>
+                </a>
+                <a href='#'>
+                  <span class="white-text email">
+                    <%= current_user.email %>
+                  </span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <%=link_to agencies_path do %>
+                <%=image_tag('/imgs/icons/bank.png',size:'20x20',class:'responsive')%>
+                  <span class="right">Agências</span>
+                  <%end%>
+            </li>
+            <li>
+              <%=link_to accounts_path do%>
+                <%=image_tag('/imgs/icons/account.png',size:'24x24',class:'responsive')%>
+                  <span class="right">Contas</span>
+                  <%end%>
+            </li>
+            <li>
+              <%= link_to transactions_path do %>
+                <%=image_tag('/imgs/icons/transaction.png',size:'20x20',class:'responsive')%>
+                  <span class="right">Transações</span>
+                  <%end%>
+            </li>
+            <li>
+              <div class="divider"></div>
+            </li>
+            <li>
+              <a class="subheader">Opções de conta</a>
+            </li>
+            <li>
+              <%= link_to('Sair', destroy_user_session_path, method: :delete) %>
+            </li>
+          </ul>
+              <%end%>
+                <div id="modal" class="modal modal-fixed-footer">
+                </div>
+                <%= yield %>
+        </div>
+      </div>
+
   </main>
   <footer class="page-footer black">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Footer Content</h5>
-          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+          <h5 class="white-text">Sistema de controle de Contas</h5>
+          <p class="grey-text text-lighten-4">.</p>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
       <div class="container">
-        © 2014 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        © vicaescorcio
+        <a class="grey-text text-lighten-4 right" href="#!">Saiba mais</a>
       </div>
     </div>
   </footer>
 
   <script>$
-     (".button-collapse").sideNav();
-     
+      (".button-collapse").sideNav();
+
   </script>
 </body>
 

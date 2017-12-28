@@ -8,24 +8,23 @@
       <th>Tipo</th>
       <th>Data</th>
       <th>Valor</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id = 'transactions'>
     <% @transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.tr_type %></td>
         <td><%= transaction.tr_date %></td>
         <td><%= transaction.valor %></td>
         <td><%= image_tag("/imgs/icons/#{transaction.tr_type}.png", size:'30x30') %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<div id='transactions'></div>
-<%= link_to 'New Transaction', new_transaction_path, remote: true %>
+<%= link_to  new_transaction_path,class:'btn-floating btn-large waves-effect waves-light red', remote: true do %>
+<i class="material-icons">add</i>  
+<%end%>

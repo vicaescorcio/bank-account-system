@@ -1,1 +1,6 @@
-<%= transaction.valor%>
+<tr>
+        <td><%= transaction.tr_type %></td>
+        <td><%= transaction.tr_date %></td>
+        <td><%= transaction.valor %></td>
+        <td><%= image_tag("/imgs/icons/#{transaction.tr_type}.png", size:'30x30') %></td>
+      </tr>
